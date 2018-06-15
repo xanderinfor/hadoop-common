@@ -38,5 +38,15 @@
   file:
     state: directory
     dest: /opt
-
+- name: Download and untar the hadoop binaries.
+  unarchive:
+    src: http://www-eu.apache.org/dist/hadoop/common/hadoop-3.1.0/hadoop-3.1.0.tar.gz
+    dest: /opt
+    copy: no
+- name: Make sure there is no existing directory.
+  file:
+    dest: /opt/hadoop
+    state: absent
+- name: Move hadoop to its new home.
+  shell: mv -v /opt/hadoop-3.1.0 /opt/hadoop
 ...
